@@ -1,0 +1,36 @@
+{% extends "stream.html" %}
+
+{% block content %}
+	<div class="row">
+		<div class="grid-25">
+			<h1>{{user.username}}</h1>
+		</div>
+		<div class="grid-50">
+			<div class="grid-33">
+				<h5>Posts</h5>
+				<p>{{ user.posts.count() }}</p>
+			</div>
+			<div class="grid-33">
+				<h5>Followers</h5>	
+				<p>{{ user.followers().count() }}</p>
+			</div>
+			<div class="grid-33">
+				<h5>Following</h5>
+				<p>{{ user.following().count() }}</p>
+			</div>
+		</div>
+		<div class="grid-25">
+			{% if current_user.is_authenticated %}
+				{% if user != current_user %}
+					{% if not user in current_user.following() %}
+						<a href="{{ url_for('follow', username = user.username) }}" class="small">Follow</a>
+					{% else %}
+						<a href="{{ url_for('unfollow', username = user.username) }}" class="small">Unfollow</a>
+					{% endif %}
+				{% endif %}
+			{% endif %}
+		</div>
+	</div>
+
+{{ super() }}
+{% endblock %}
