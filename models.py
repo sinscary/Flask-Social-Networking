@@ -12,9 +12,9 @@ Before Starting Package needed to be installed
 
 import datetime
 
-from flask.ext.bcrypt import generate_password_hash
-from flask.ext.login import UserMixin
-"""Flask have an ecosystem where package gets installed to this ext(external area) 
+from flask_bcrypt import generate_password_hash
+from flask_login import UserMixin
+"""Flask have an ecosystem where package gets installed to this ext(external area)
 module. and inside of that we get the package.
 Read About UserMixin - 'http://flask-login.readthedocs.org/en/latest/#your-user-class'
 """
@@ -23,7 +23,7 @@ from peewee import *
 
 DATABASE = SqliteDatabase('social.db')
 
-class User(UserMixin, Model):   
+class User(UserMixin, Model):
 	"""Parent class can be more than one"""
 	username = CharField(unique = True)
 	email = CharField(unique = True)
@@ -71,7 +71,7 @@ class User(UserMixin, Model):
 			with DATABASE.transaction():
 				cls.create(
 					username = username,
-					email = email,	
+					email = email,
 					password = generate_password_hash(password),
 					is_admin = admin
 					)
@@ -82,7 +82,7 @@ class User(UserMixin, Model):
 class Post(Model):
 	timestamp = DateTimeField(default = datetime.datetime.now)
 	user = ForeignKeyField(
-		rel_model = User,
+		User,
 		related_name = 'posts'
 	)
 	content = TextField()
@@ -98,7 +98,7 @@ class Relationship(Model):
 	class Meta:
 		database = DATABASE
 		indexes = (
-				(('from_user','to_user'), True)
+				(('from_user','to_user'), True),
 			)
 
 def initialize():
