@@ -1,6 +1,6 @@
 from flask import (Flask, g, render_template, flash, redirect, url_for,abort)
-from flask.ext.bcrypt import check_password_hash
-from flask.ext.login import (LoginManager, login_user, logout_user, 
+from flask_bcrypt import check_password_hash
+from flask_login import (LoginManager, login_user, logout_user,
 							login_required, current_user)
 
 import forms
@@ -29,7 +29,7 @@ def load_user(userid):
 @app.before_request
 def before_request():
 	"""Connect to database before each request
-		g is a global object, passed around all time in flask, used to setup things which 
+		g is a global object, passed around all time in flask, used to setup things which
 		we wanna have available everywhere.
 	"""
 	g.db = models.DATABASE
@@ -68,7 +68,7 @@ def login():
 			flash("Your email or password does not match", "error")
 		else:
 			if check_password_hash(user.password, form.password.data):
-				login_user(user) 
+				login_user(user)
 				"""Creating a session on user's browser"""
 				flash("You have been logged in", "success")
 				return redirect(url_for('index'))
@@ -89,7 +89,7 @@ def logout():
 def post():
 	form = forms.PostForm()
 	if form.validate_on_submit():
-		models.Post.create(user = g.user.id, 
+		models.Post.create(user = g.user.id,
 							content = form.content.data.strip())
 		flash("Message Posted: Thanks!", "success")
 		return redirect(url_for('index'))
