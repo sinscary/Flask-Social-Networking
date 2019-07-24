@@ -106,7 +106,7 @@ def index():
 @app.route('/stream/<username>')
 def stream(username = None):
 	template = 'stream.html'
-	if username and username != current_user.username:
+	if username and (current_user.is_anonymous or username != current_user.username):
 		try:
 			user = models.User.select().where(models.User.username**username).get()
 		except models.DoesNotExist:
