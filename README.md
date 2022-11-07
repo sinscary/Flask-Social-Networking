@@ -1,26 +1,22 @@
 # Flask-Social-Networking
 This is a Small Social Networking website developed using Flask and Peewee. It uses Jinja-2 templating engine. 
 
-#Requirements
+## Requirements
 
 Before Starting Package needed to be installed
-
-1) pip install flask
-
-2) pip install peewee
-
-3) pip install flask-login
-
-4) pip install flask-bcrypt (It uses the blue fish cipher)
-
-5) pip install flask-wtf
-
+```bash
+pip install flask
+$ pip install peewee
+$ pip install flask-login
+$ pip install flask-bcrypt
+$ pip install flask-wtf
+```
 Python version >= 2.7
 
-#Platform Specification
-Runs on Mac OSX, Windows, Linux.
+## Platform Specification
+Runs on Mac OSX, Windows, and Linux.
 
-#Installation
+## Installation
 fork the github [Repository.](https://github.com/sinscary/Flask-Social-Networking.git) 
 
 Run following line in terminal to install dependencies
@@ -33,6 +29,6 @@ after installing run
 ```
 fire up your browser and visit
 ```http
-  localhost:8000
+  localhost:8000 (or any other port you set)
 ```
 
