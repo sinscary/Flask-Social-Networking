@@ -5,7 +5,7 @@ This is a Small Social Networking website developed using Flask and Peewee. It u
 
 Before Starting Package needed to be installed
 ```bash
-pip install flask
+$ pip install flask
 $ pip install peewee
 $ pip install flask-login
 $ pip install flask-bcrypt
